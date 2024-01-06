@@ -6,6 +6,7 @@ ZONE = b
 REPO = test-repo
 APP = test-app
 APP_IMG = ${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/${APP}:latest
+SERVICE = test-service
 
 
 ###  SETUP CLI
@@ -60,7 +61,7 @@ grant-service:  # Grant the IAM Service Account User role to the Cloud Build ser
 		--member=serviceAccount:${SERVICE_ACCOUNT} --role=roles/iam.serviceAccountUser
 
 deploy:
-	${GCLOUD} run deploy cloudrunservice --image ${APP_IMG} --region ${REGION} --platform managed --allow-unauthenticated
+	${GCLOUD} run deploy ${SERVICE} --image ${APP_IMG} --region ${REGION} --platform managed --allow-unauthenticated
 
 build-and-deploy:  repo-create  build  grant-run-admin  grant-service  deploy
 
