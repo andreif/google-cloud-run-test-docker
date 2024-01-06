@@ -63,3 +63,11 @@ deploy:
 	${GCLOUD} run deploy cloudrunservice --image ${APP_IMG} --region ${REGION} --platform managed --allow-unauthenticated
 
 build-and-deploy:  repo-create  build  grant-run-admin  grant-service  deploy
+
+
+### LOCAL
+
+LOCAL_IMG = ${APP_IMG}-local
+local-run:
+	docker build ${PLATFORM} -t ${LOCAL_IMG} .
+	docker run ${PLATFORM} --rm -ti -p 8080:8080 --name ${APP}-local ${LOCAL_IMG}

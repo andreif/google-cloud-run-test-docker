@@ -1,3 +1,5 @@
 FROM python:3.12-alpine
 EXPOSE 8080
-ENTRYPOINT ["python", "-m", "http.server", "-d", "/tmp", "8080"]
+WORKDIR /app
+ADD . /app
+ENTRYPOINT ["python", "main.py"]
